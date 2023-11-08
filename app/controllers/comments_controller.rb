@@ -6,6 +6,10 @@ class CommentsController < ApplicationController
     comment.body = params.fetch("query_body")
     comment.save
     
-    redirect_to("/venues/#{comment.venue_id}")
+    the_id = params.fetch("query_venue_id")
+    matching_venues = Venue.where({ :id => the_id })
+    the_venue = matching_venues.at(0)
+
+    redirect_to("/venues/#{the_venue.id}")
   end
 end
